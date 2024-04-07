@@ -17,7 +17,7 @@ export const getProducts = async (req, res) => {
 
 
 export const createProduct = async (req, res) => {
-    const {produto,preco,descricao,image}=req.body
+    const {produto,preco,descricao,image,categoria}=req.body
     try {
         if(!produto){
             return res.status(401).json({message:"O Nome do produto é obrigatório"})
@@ -31,8 +31,11 @@ export const createProduct = async (req, res) => {
         if(!image){
             return res.status(401).json({message:"O link da imagem é obrigatória"})
         }
-        await Product.create({produto,preco,descricao,image})
-        return res.status(201).json({produto,preco,descricao,image})
+        if(!categoria){
+            return res.status(401).json({message:"ecolha uma categoria"})
+        }
+        await Product.create({produto,preco,descricao,image,categoria})
+        return res.status(201).json({produto,preco,descricao,image,categoria})
         
         
     } catch (error) {
@@ -49,6 +52,7 @@ export const updateProduct = async (req, res) => {
         preco,
         descricao,
         image,
+        categoria,
         isVisible
     } = req.body;
 
@@ -68,6 +72,7 @@ export const updateProduct = async (req, res) => {
             preco,
             descricao,
             image,
+            categoria,
             isVisible
         }
        
@@ -76,7 +81,7 @@ export const updateProduct = async (req, res) => {
 
 
         return res.status(200).json({
-            product
+            produtoUpdated
         });
     } catch (error) {
 

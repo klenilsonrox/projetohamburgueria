@@ -13,6 +13,9 @@ const productSchema = new Schema({
     image:{
         type:String,
     },
+    categoria:{
+        type:String,
+    },
     isVisible: {
         type: Boolean,
         default: false
