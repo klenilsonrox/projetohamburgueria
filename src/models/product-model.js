@@ -18,7 +18,7 @@ const productSchema = new Schema({
     },
     isVisible: {
         type: Boolean,
-        default: false
+        default: true
     }
 });
 
